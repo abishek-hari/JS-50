@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS-50</title>
+  </head>
+  <body>
+    <section>
+      <div>
+        <h1>WELCOME TO JS-50</h1>
+      </div>
+      <!-- Inline Javascript-->
+      <button onclick="alert('hello guys')">hello there!</button>
+      <button class="btn">random btn</button
+      ><button class="btn">random btn</button
+      ><button class="btns">random btn</button>
+    </section>
+    <!-- Internal Javascript-->
+    <script>
+      const random = document.querySelectorAll(".btn");
+      random.forEach((item) =>
+        item.addEventListener("click", () => {
+          alert("tenet");
+        })
+      );
+    </script>
+    <!--External Javascript-->
+    <script src="./script.js"></script>
+  </body>
+</html>
