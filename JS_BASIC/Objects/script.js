@@ -164,3 +164,131 @@ raki.deposit(300);
 raki.deposit(600);
 
 // PROTOTYPE LOOKUP
+
+//ES6 classes - Syntactic Sugar
+// prototypal Inheritance
+// using the class you can write the above constructor function in much more cleaner way
+
+class Bank {
+  constructor(name, initialBalace) {
+    this.name = name;
+    this.balance = initialBalace;
+  }
+  deposit(amount) {
+    this.balance += amount;
+    console.log(`hi ${this.name} you balance is ${this.balance}`);
+  }
+}
+
+const wiki = new Bank("wiki", 200);
+console.log(wiki);
+wiki.deposit(400);
+
+// CALL, APLLY & BIND
+
+//CALL
+// call - it runs instantly
+// arguments - list of items
+
+const player1 = {
+  name: "hussain",
+  age: 40,
+  greet() {
+    console.log(this);
+    console.log(`hi my name is ${this.name} and im ${this.age} year old`);
+  },
+};
+
+const player2 = {
+  name: "marodona",
+  age: 45,
+};
+
+function greet() {
+  console.log(this);
+  console.log(`hi my name is ${this.name} and im ${this.age} year old`);
+}
+
+// this will fail - get an error
+// player2.greet();
+// greet();
+// const secondGreet = player2.greet;
+// secondGreet();
+
+// this will work
+greet.call(player1); //you can call from a function
+greet.call(player2);
+greet.call({ name: "hari", age: 25 }); //you can also set a new one to it
+player1.greet.call(player2); //you can also access the function from the object
+
+// APPLY , ARGUMENT
+// apply - it runs instantly
+// argument -array of items
+
+const play1 = {
+  name: "messi",
+  age: 38,
+};
+
+const play2 = {
+  name: "neymar",
+  age: 35,
+};
+
+function greet(city, country) {
+  console.log(this);
+  console.log(
+    `hi my name is ${this.name} and im ${this.age} year old and i live in ${city},${country}`
+  );
+}
+
+greet.call(play1, "san degio", "us"); // here agruments take as list of item
+greet.call(play2, "las vegas", "uk");
+
+greet.apply(play1, ["san faransico", "uk"]); // here agruments take as array of item
+greet.apply(play2, ["san degiuo", "us"]);
+
+// BIND
+// assign , use it later
+// arguments - list of items
+const players1 = {
+  name: "ronaldo",
+  age: 38,
+};
+
+const players2 = {
+  name: "iniesta",
+  age: 35,
+};
+
+function greet(city, country) {
+  console.log(this);
+  console.log(
+    `hi my name is ${this.name} and im ${this.age} year old and i live in ${city},${country}`
+  );
+}
+
+//  assign , call it later
+const great = greet.bind(players1, "toranto", "ca");
+great();
+
+const greats = greet.bind(players2, "mafia", "ca");
+greats();
+
+// Example
+const counter = {
+  count: 0,
+  increment() {
+    console.log(this);
+    this.count++;
+    console.log(this.count);
+  },
+};
+
+const btn = document.querySelector(".increment");
+
+const increment = counter.increment.bind(counter);
+btn.addEventListener("click", increment);
+
+// btn.removeEventListener("click", increment);
+// it will remove the increment
