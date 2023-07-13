@@ -152,3 +152,106 @@ function sayHello(person = "susan") {
 sayHello(); // If you dont pass any argument the default parameter will be shown
 
 // In hoisting concept : If you call the function above the declaration but In arrow function you cannot do you will get an error
+
+// ARRAY DESTRUCTURING
+
+const fruits = ["apple", "orange", "grapes", "banana"];
+
+const [apple, orange, grapes, banana] = fruits; // destructiring names can be anything
+
+console.log(apple, orange, grapes, banana);
+
+// SWAP VALUES
+
+let first = "first";
+let second = "second";
+
+// older way
+// let temp = second;
+// second = first;
+// first = temp;
+
+// using destructuring
+[second, first] = [first, second];
+console.log(first, second);
+
+// OBJECTS DESTRUCTURING
+// In arrays you can desturture with any names but in object it should refer crtly to the objects properties
+
+const beckam = {
+  name: "beckam",
+  last: "joe",
+  address: {
+    street: "123 main street",
+  },
+};
+
+const {
+  name,
+  last: lastName,
+  address: { street },
+} = beckam; // last:lastName Its called aliasing (can change the name)
+console.log(name, lastName, street);
+
+// object destructuring using function
+
+function printPerson(person) {
+  const {
+    name,
+    last,
+    address: { street },
+  } = person;
+  console.log(name, last, street);
+}
+printPerson(beckam);
+
+// FOR OF
+// loops though the values of an iterable objects
+// strings,array ,map, set etc - NOT OBJECTS
+//unlike  forEach - we can use break, continue
+
+const friends = ["carry", "morgan", "lisa"];
+
+for (const friend of friends) {
+  if (friend === "lisa") {
+    break;
+  }
+  console.log(friend);
+}
+
+// SPREAD OPERATOR...
+// Allows an iterable to spread/expand individually inside reciever
+// split into single items and copy them
+const udemy = "udemy";
+const letters = [...udemy];
+console.log(letters);
+
+const boys = ["jim", "kin", "jun"];
+const girls = ["lisa", "rose", "angel"];
+const bestFriend = "arnold";
+
+// To make all the abouve array into single items we can use ...
+
+const friend = [...boys, bestFriend, ...girls];
+console.log(friend);
+
+// If we use spread operator we will copy the items and if we change it will not affect the orginal array
+
+const oldPerson = {
+  name: "john",
+  job: "developer",
+};
+const newPerson = { ...oldPerson, city: "chicago" }; //you can set new properties to this
+console.log(newPerson);
+
+// Function Argument - spread operator
+
+const numb = [23, 45, 67, 89, 34];
+console.log(Math.max(...numb));
+
+const cary = ["cary", "sandres"];
+
+const hiThere = (name, lastname) => {
+  console.log(`hello , ${name} ${lastname}`);
+};
+hiThere(...cary);
