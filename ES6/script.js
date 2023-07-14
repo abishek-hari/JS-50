@@ -255,3 +255,193 @@ const hiThere = (name, lastname) => {
   console.log(`hello , ${name} ${lastname}`);
 };
 hiThere(...cary);
+
+// REST OPERATOR
+// GATHERS/COLLECTS THE ITEMS
+// It can be used in destructuring arrays and in gathering parameters in function
+// spread operator is for function argument and rest is for function parameters
+
+const fruit = ["apple", "orange", "grapes", "banana"];
+const [tops, ...fruty] = fruit;
+console.log(tops, fruty);
+
+const jason = {
+  name: "john",
+  job: "developer",
+};
+
+const { job } = jason;
+console.log(job);
+
+const getAverageScore = (name, ...scores) => {
+  let sum = 0;
+  for (const score of scores) {
+    sum += score;
+  }
+  console.log(`hey ${name} your score is ${sum / scores.length}`);
+};
+getAverageScore("harry", 89, 78, 54, 56, 29, 20);
+
+// ARRAY.from AND ARRAY.of - NOT ON THE PROTOTYPE
+// ARRAY.from
+// ARRAY.of
+// of creates a new array instance from a variable number of arguments.
+
+const oldfriends = Array.of("julie", 25, "developer");
+console.log(oldfriends);
+
+// Array.from - returns Array object from any object with a length property or an iterable object
+// from turns array-like/ish into array - string, nodeList,set
+
+const edureka = "edureka";
+console.log(Array.from(edureka));
+
+function countTotal() {
+  let sums = Array.from(arguments).reduce((total, currNum) => {
+    total += currNum;
+    return total;
+  }, 0);
+  console.log(sums);
+}
+
+countTotal(34, 56, 29, 79, 300);
+
+// Array.from - NodeList
+
+const p = document.querySelectorAll("p");
+const firstPara = document.querySelector(".first");
+const secondPara = document.querySelector(".second");
+
+let newtext = Array.from(p);
+newtext = newtext.map((item) => `<span>${item.textContent}</span>`).join(" ");
+firstPara.innerHTML = newtext;
+
+// shortway
+// Array.from has an second argument
+const anotherText = Array.from(document.querySelectorAll("p"), (item) => {
+  return `<span>${item.textContent}</span>`;
+}).join(" ");
+
+secondPara.innerHTML = anotherText;
+
+// FIND, FINDINDEX, EVERY, SOME
+// FIND - gets specific item.
+// FINDINDEX - get's index of the item
+// EVERY - every item in the array
+// SOME - at least one item
+
+const people = [
+  { id: 1, name: "john" },
+  { id: 2, name: "susan" },
+  { id: 3, name: "anna" },
+];
+const grades = ["A", "B", "A", "B", "C"];
+const goodGrades = ["A", "B", "A", "B"];
+
+const ana = people.find((person) => (person.name = "anna"));
+console.log(ana);
+
+const ram = people.findIndex((persons) => persons.id === 2);
+console.log(ram);
+
+// "for in" loop - iterates over objects properties
+// not advised to use it on arrays, especially if the order is important
+// on arrays use "for of" loop instead
+
+const jasonRoi = {
+  name: "john",
+  job: "developer",
+};
+
+for (const propertyName in jasonRoi) {
+  console.log(`${propertyName} : ${jasonRoi[propertyName]}`);
+}
+
+// THREE METHODS TO CONVERT OBJECTS INTO ARRAYS
+// Object.keys() - Converts property names into array
+// Object.values() = Converts property values into array
+// Object.entries() - converts both
+
+const leo = {
+  name: "john",
+  age: 25,
+  job: "developer",
+};
+
+const keys = Object.keys(leo);
+console.log(keys);
+
+const values = Object.values(leo);
+console.log(values);
+
+const entry = Object.entries(leo);
+console.log(entry);
+
+// SET OBJECT - Stores a collection of unique values of any type
+
+// new Set()
+// add(value)
+// delete(value)
+// clear()
+// has(value)
+
+// iterators
+// entries(), keys(), values(), forEach
+
+const unique = new Set();
+
+unique.add("first");
+unique.add("second");
+unique.add("third");
+
+unique.has("third"); // check if the value ( return true or false)
+
+unique.delete("second"); // deleted particular value
+console.log(unique);
+
+// new Set - accepts iterable objects
+
+const products = [
+  { title: " higb-back ", company: "ikea" },
+  { title: " higb-front ", company: "marcos" },
+  { title: " higb-back ", company: "ikea" },
+  { title: "accent chair", company: "caressa" },
+  { title: "wooden table ", company: "ikea" },
+];
+
+const companies = products.map((item) => item.company);
+console.log(companies);
+
+const uniqueCompanies = new Set(companies);
+console.log(uniqueCompanies);
+
+const finalCompanies = ["all", ...uniqueCompanies];
+console.log(finalCompanies);
+
+//  You can optimize you code
+
+const resultCompany = ["all", ...new Set(products.map((item) => item.company))];
+console.log(resultCompany);
+
+// String includes() - checks if a string containes another string
+
+const product = [
+  { title: "modern poster" },
+  { title: "Bar stool" },
+  { title: "Armchair" },
+  { title: "leather Chair" },
+];
+
+const pro = "a";
+const filteredProducts = product.filter((product) => {
+  return product.title.toLowerCase().includes(pro);
+});
+console.log(filteredProducts);
+
+// Array includes() - checks if the items is an array
+// useful in the conditional statements
+
+const groceries = ["milk", "bread", "butter"];
+if (groceries.includes("milk")) {
+  console.log(`yeah! it's there`);
+}
